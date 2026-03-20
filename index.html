@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/pixel.js"></script> </head>
+<body>
+    <header style="padding:15px; font-weight:700; border-bottom:1px solid #eee;">TATA IPL 2026</header>
+    <div id="match-container"></div>
+
+    <script type="module">
+        import { db, ref, onValue } from './js/firebase.js';
+        const container = document.getElementById('match-container');
+
+        onValue(ref(db, 'matches'), (snapshot) => {
+            const data = snapshot.val();
+            container.innerHTML = '';
+            Object.keys(data).sort((a,b) => data[b].timestamp - data[a].timestamp).forEach(id => {
+                const m = data[id];
+                container.innerHTML += `
+                    <div class="match-card" onclick="location.href='event.html?id=${id}'">
+                        <div class="date-section">
+                            <div class="day">${new Date(m.date).getDate()}</div>
+                            <div class="month">${new Date(m.date).toLocaleString('default', { month: 'short' })}</div>
+                        </div>
+                        <div class="match-info">
+                            <div class="match-title">${m.title}</div>
+                            <div class="match-loc">${m.venue} | ${m.time}</div>
+                            <div class="status-tag">Filling Fast</div>
+                        </div>
+                    </div>`;
+            });
+        });
+    </script>
+</body>
+</html>
