@@ -1,0 +1,24 @@
+<div class="admin-form">
+    <input type="text" id="mTitle" placeholder="Match Title (MI vs CSK)">
+    <input type="date" id="mDate">
+    <input type="text" id="mTime" placeholder="7:30 PM">
+    <input type="text" id="mVenue" placeholder="Wankhede Stadium">
+    <input type="number" id="mPrice" placeholder="Price (1200)">
+    <button onclick="addMatch()">Publish Match</button>
+</div>
+
+<script type="module">
+    import { db, ref, push, set } from './js/firebase.js';
+    window.addMatch = async () => {
+        const newMatchRef = push(ref(db, 'matches'));
+        await set(newMatchRef, {
+            title: document.getElementById('mTitle').value,
+            date: document.getElementById('mDate').value,
+            time: document.getElementById('mTime').value,
+            venue: document.getElementById('mVenue').value,
+            price: document.getElementById('mPrice').value,
+            timestamp: Date.now()
+        });
+        alert("Match Added!");
+    };
+</script>
