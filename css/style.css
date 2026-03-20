@@ -1,0 +1,52 @@
+:root {
+    --bms-red: #F84464;
+    --bms-dark: #333545;
+    --text-main: #222222;
+    --text-grey: #666666;
+    --bg-light: #F5F5F5;
+    --border: #EEEEEE;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body { margin: 0; font-family: 'Roboto', sans-serif; background: #fff; color: var(--text-main); }
+
+/* Reference Image 1: Match Cards */
+.match-card {
+    display: flex;
+    margin: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.date-section {
+    width: 65px;
+    padding: 15px 0;
+    text-align: center;
+    border-right: 1px dashed #d1d1d1;
+    display: flex; flex-direction: column; justify-content: center;
+}
+.date-section .day { font-size: 20px; font-weight: 700; }
+.date-section .month { font-size: 12px; text-transform: uppercase; }
+.match-info { padding: 12px; flex: 1; }
+.match-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.match-loc { font-size: 12px; color: var(--text-grey); margin-bottom: 8px; }
+.status-tag { color: var(--bms-red); font-size: 11px; font-weight: 600; }
+
+/* Sticky Bottom CTA */
+.bottom-cta {
+    position: fixed; bottom: 0; width: 100%; padding: 12px 16px;
+    background: #fff; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+}
+.btn-primary {
+    background: var(--bms-red); color: #fff; border: none;
+    padding: 12px 32px; border-radius: 8px; font-weight: 700; width: 60%;
+}
+
+/* Seat Map Styles */
+.seat-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 8px; padding: 20px; }
+.seat { width: 25px; height: 25px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; }
+.seat.available { background: #fff; border-color: #21C179; }
+.seat.selected { background: #FFD23F; border-color: #FFD23F; }
+.seat.booked { background: #EBEBEB; border-color: #EBEBEB; pointer-events: none; }
