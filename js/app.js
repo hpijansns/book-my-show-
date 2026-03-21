@@ -196,7 +196,7 @@ if (document.getElementById('event-container')) {
         `;
 
         bookBtn.onclick = () => {
-            tncModal.classList.add('active'); // Show rules modal first
+            tncModal.classList.add('active'); 
         };
         
         acceptTncBtn.onclick = () => {
@@ -210,7 +210,7 @@ if (document.getElementById('event-container')) {
 }
 
 // ---------------------------------------------
-// 3. SEATS PAGE (Quantity + Grid View)
+// 3. SEATS PAGE
 // ---------------------------------------------
 if (document.getElementById('qty-bubbles')) {
     const matchId = localStorage.getItem('booking_matchId');
@@ -221,14 +221,12 @@ if (document.getElementById('qty-bubbles')) {
 
     document.getElementById('seat-match-title').innerText = matchTitle;
 
-    // View Toggles
     const qtyView = document.getElementById('qty-view');
     const seatView = document.getElementById('seat-view');
     const proceedToSeatsBtn = document.getElementById('proceed-to-seats');
     
-    let allowedQty = 1; // Default selected
+    let allowedQty = 1; 
 
-    // Generate 1 to 10 bubbles
     const bubbleContainer = document.getElementById('qty-bubbles');
     for(let i=1; i<=10; i++){
         let b = document.createElement('div');
@@ -242,14 +240,12 @@ if (document.getElementById('qty-bubbles')) {
         bubbleContainer.appendChild(b);
     }
 
-    // Go to Seat Map Grid
     proceedToSeatsBtn.onclick = () => {
         qtyView.style.display = 'none';
         seatView.style.display = 'block';
         initSeatMap();
     };
 
-    // --- SEAT GRID LOGIC ---
     const initSeatMap = () => {
         const seatMap = document.getElementById('seat-map');
         const checkoutBar = document.getElementById('checkout-bar');
@@ -259,7 +255,7 @@ if (document.getElementById('qty-bubbles')) {
         const LOCK_EXPIRY = 4 * 60 * 1000; 
 
         let selectedSeatsCount = 0;
-        const TOTAL_SEATS = 60; // 6x10
+        const TOTAL_SEATS = 60;
         
         const renderSeats = (seatsData) => {
             seatMap.innerHTML = '';
