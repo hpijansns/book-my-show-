@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Details</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1252040857081560');
+    fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+</head>
+<body class="bg-gray">
+    <header class="transparent-header">
+        <button class="back-btn" onclick="window.history.back()">&#8592;</button>
+        <h2>Match Details</h2>
+    </header>
+
+    <main id="event-container" class="event-wrapper">
+        <div class="loading">Loading details...</div>
+    </main>
+
+    <div class="sticky-bottom">
+        <div class="price-info">
+            <span class="label">Starting from</span>
+            <span class="value" id="event-price">₹0</span>
+        </div>
+        <button id="book-now-btn" class="btn-primary">Book Now</button>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
