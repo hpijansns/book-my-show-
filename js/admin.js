@@ -1,7 +1,12 @@
 import { db, ref, onValue, set, remove, push } from './firebase.js';
 
-if (document.getElementById('match-form')) {
+// DOMContentLoaded use kar rahe hain taaki HTML poora load hone ke baad hi JS chale
+document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('match-form');
+    
+    // Agar hum admin panel mein nahi hain, toh code yahin ruk jaye
+    if (!form) return;
+
     const tableBody = document.getElementById('admin-match-list');
     
     const editIdInput = document.getElementById('edit-id');
