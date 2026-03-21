@@ -11,7 +11,6 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
 body { background-color: #f4f4f5; color: var(--text-main); -webkit-font-smoothing: antialiased; }
 
 /* Mobile Container */
@@ -106,8 +105,8 @@ body { background-color: #f4f4f5; color: var(--text-main); -webkit-font-smoothin
 .qty-container { background: #fff; margin-top: -20px; border-radius: 20px 20px 0 0; position: relative; padding: 24px 16px; text-align: center; height: calc(100vh - 250px); }
 .qty-container h2 { font-size: 18px; font-weight: 600; margin-bottom: 10px; color: #333; }
 .qty-bubbles { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 24px 0; }
-.qty-bubble { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #333; cursor: pointer; transition: 0.2s; }
-.qty-bubble.active { background: var(--primary); color: #fff; font-weight: 600; }
+.qty-bubble { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; color: #333; cursor: pointer; transition: 0.2s; border:1px solid #eee; }
+.qty-bubble.active { background: var(--primary); color: #fff; font-weight: 600; border-color:var(--primary); }
 .info-pill { background: #f4f4f5; display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; border-radius: 20px; font-size: 12px; color: #666; margin-bottom: 40px; }
 .bottom-fixed-btn { padding: 16px; position: absolute; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid var(--border); }
 
@@ -146,7 +145,8 @@ body { background-color: #f4f4f5; color: var(--text-main); -webkit-font-smoothin
 .table-responsive { overflow-x: auto; }
 #admin-table { width: 100%; border-collapse: collapse; font-size: 14px; }
 #admin-table th, #admin-table td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
-.action-btn { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; margin-right: 4px; }
+.action-btn { padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; margin-right: 4px; font-weight:bold;}
 .btn-edit { background: #17a2b8; color: #fff; }
 .btn-delete { background: var(--primary); color: #fff; }
+.btn-secondary { background: #555; color: #fff; border: none; padding: 14px 24px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; width: 100%; transition: 0.2s; }
 .loading { text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px; }
