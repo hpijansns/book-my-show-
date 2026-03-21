@@ -1,41 +1,71 @@
-// Inside seats.html <script type="module">
-import { db, ref, onValue, update } from './js/firebase.js';
-
-const matchId = new URLSearchParams(window.location.search).get('id');
-const timerEl = document.getElementById('timer');
-let timeLeft = 240; // 4 minutes
-
-function startTimer() {
-    const countdown = setInterval(() => {
-        const m = Math.floor(timeLeft / 60);
-        const s = timeLeft % 60;
-        timerEl.innerText = `You have approximately ${m}:${s < 10 ? '0'+s : s} minutes to select your seats.`;
-        if (timeLeft <= 0) {
-            clearInterval(countdown);
-            alert("Session Expired");
-            location.href = 'index.html';
-        }
-        timeLeft--;
-    }, 1000);
-}
-
-// Real-time seat update
-onValue(ref(db, `seats/${matchId}`), (snapshot) => {
-    const seats = snapshot.val() || {};
-    renderSeatMap(seats);
-});
-
-async function toggleSeat(seatId, currentStatus) {
-    if (currentStatus === 'booked') return;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Seats</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    const newStatus = currentStatus === 'selected' ? 'available' : 'selected';
-    await update(ref(db, `seats/${matchId}/${seatId}`), {
-        status: newStatus,
-        timestamp: Date.now()
-    });
-    
-    if(newStatus === 'selected') {
-        fbq('track', 'AddToCart', { currency: 'INR', value: 1200 });
-    }
-}
-  
+    <!-- Facebook Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1252040857081560');
+    fbq('track', 'PageView');
+    </script>
+    <!-- End Facebook Pixel Code -->
+</head>
+<body class="bg-white">
+    <header class="top-header">
+        <button class="back-btn" onclick="window.history.back()">&#8592;</button>
+        <div class="header-titles">
+            <h2 id="seat-match-title">Select Seats</h2>
+            <p id="seat-match-venue" class="sub-text">Loading...</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="seat-legend">
+            <div class="legend-item"><div class="seat available"></div> Available</div>
+            <div class="legend-item"><div class="seat locked"></div> Selected</div>
+            <div class="legend-item"><div class="seat booked"></div> Sold</div>
+        </div>
+
+        <div class="screen-indicator">
+            <div class="screen-curve"></div>
+            <span>PITCH THIS WAY</span>
+        </div>
+
+        <div id="seat-map" class="seat-grid">
+            <!-- Seats injected by JS -->
+        </div>
+    </main>
+
+    <div class="sticky-bottom" id="checkout-bar" style="display: none;">
+        <div class="price-info">
+            <span class="label" id="seat-count-label">0 Seats</span>
+            <span class="value" id="total-price">₹0</span>
+        </div>
+        <button id="pay-now-btn" class="btn-primary">Pay Now</button>
+    </div>
+
+    <!-- Payment Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content text-center">
+            <div class="success-icon">✓</div>
+            <h3>Booking Confirmed!</h3>
+            <p>Your tickets have been successfully booked.</p>
+            <button onclick="window.location.href='index.html'" class="btn-primary mt-20">Back to Home</button>
+        </div>
+    </div>
+
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
