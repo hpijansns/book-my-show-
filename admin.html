@@ -1,24 +1,85 @@
-<div class="admin-form">
-    <input type="text" id="mTitle" placeholder="Match Title (MI vs CSK)">
-    <input type="date" id="mDate">
-    <input type="text" id="mTime" placeholder="7:30 PM">
-    <input type="text" id="mVenue" placeholder="Wankhede Stadium">
-    <input type="number" id="mPrice" placeholder="Price (1200)">
-    <button onclick="addMatch()">Publish Match</button>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - IPL Tickets</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <nav class="admin-nav">
+        <div class="container">
+            <h2>Admin Dashboard</h2>
+        </div>
+    </nav>
 
-<script type="module">
-    import { db, ref, push, set } from './js/firebase.js';
-    window.addMatch = async () => {
-        const newMatchRef = push(ref(db, 'matches'));
-        await set(newMatchRef, {
-            title: document.getElementById('mTitle').value,
-            date: document.getElementById('mDate').value,
-            time: document.getElementById('mTime').value,
-            venue: document.getElementById('mVenue').value,
-            price: document.getElementById('mPrice').value,
-            timestamp: Date.now()
-        });
-        alert("Match Added!");
-    };
-</script>
+    <div class="container admin-container">
+        <div class="admin-card form-section">
+            <h3 id="form-title">Add New Match</h3>
+            <form id="match-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label>Match Title</label>
+                    <input type="text" id="m-title" placeholder="e.g. CSK vs MI" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="m-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Time</label>
+                        <input type="time" id="m-time" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Venue</label>
+                    <input type="text" id="m-venue" placeholder="Stadium Name" required>
+                </div>
+                <div class="form-group">
+                    <label>Base Price (₹)</label>
+                    <input type="number" id="m-price" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Team 1 Logo</label>
+                    <input type="file" id="m-team1" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>Team 2 Logo</label>
+                    <input type="file" id="m-team2" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label>Banner Image</label>
+                    <input type="file" id="m-banner" accept="image/*">
+                </div>
+
+                <button type="submit" id="save-btn" class="btn-primary mt-20">Save Match</button>
+                <button type="button" id="cancel-btn" class="btn-secondary mt-20" style="display:none;">Cancel Edit</button>
+            </form>
+        </div>
+
+        <div class="admin-card table-section">
+            <h3>Manage Matches</h3>
+            <div class="table-responsive">
+                <table id="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-match-list">
+                        <!-- Admin list injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+</body>
+</html>
