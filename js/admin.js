@@ -21,7 +21,7 @@ if (document.getElementById('match-form')) {
     let isEditing = false;
     let currentMatchData = null;
 
-    // Load Matches in Table
+    // 1. Fetch & Render Matches in Table
     onValue(ref(db, 'matches'), (snapshot) => {
         tableBody.innerHTML = '';
         const matches =
