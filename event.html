@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Match Details</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Facebook Pixel Code -->
+    <!-- Facebook Pixel -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -20,24 +20,47 @@
     fbq('init', '1252040857081560');
     fbq('track', 'PageView');
     </script>
-    <!-- End Facebook Pixel Code -->
 </head>
-<body class="bg-gray">
-    <header class="transparent-header">
-        <button class="back-btn" onclick="window.history.back()">&#8592;</button>
-        <h2>Match Details</h2>
+<body class="mobile-layout">
+    <header class="bms-header white-header">
+        <div class="header-left">
+            <span class="back-icon" onclick="window.history.back()">&#8249;</span>
+        </div>
+        <div class="header-right">
+            <span class="share-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+            </span>
+        </div>
     </header>
 
-    <main id="event-container" class="event-wrapper">
+    <main id="event-container" class="event-wrapper" style="padding-bottom: 90px;">
         <div class="loading">Loading details...</div>
     </main>
 
-    <div class="sticky-bottom">
-        <div class="price-info">
-            <span class="label">Starting from</span>
-            <span class="value" id="event-price">₹0</span>
+    <!-- Important Note Modal (Terms) -->
+    <div id="tnc-modal" class="modal">
+        <div class="modal-content text-left tnc-box">
+            <h3>Important Note</h3>
+            <div class="tnc-list">
+                <p>- Seated Event!</p>
+                <p>- Respective seat numbers will be randomly allotted and mentioned on your physical ticket.</p>
+                <p>- Children of two years of age or over must have their own ticket.</p>
+                <p>- All persons under the age of 18 must be accompanied by and under the supervision of (in each case constantly) an adult who also has a ticket for the Match.</p>
+                <p>- No Re-entry allowed.</p>
+                <p><strong>- B Block Premium BKT TYRES PAVILION - Hospitality includes Food Buffet and Soft Beverages + KKR Fan Jersey + KKR Scarf</strong></p>
+                <p><strong>- L Block Premium VIDA PAVILION - Hospitality includes Food Box + KKR Fan Jersey</strong></p>
+            </div>
+            <button id="accept-tnc-btn" class="btn-primary" style="margin-top:20px;">Okay, Got It</button>
         </div>
-        <button id="book-now-btn" class="btn-primary">Book Now</button>
+    </div>
+
+    <!-- Sticky Bottom Bar -->
+    <div class="sticky-footer" id="event-footer" style="display:none;">
+        <div class="price-info">
+            <div class="price" id="event-price">₹0 onwards</div>
+            <div class="status">Filling Fast</div>
+        </div>
+        <button id="book-now-btn" class="book-now-btn">Book Now</button>
     </div>
 
     <script type="module" src="js/app.js"></script>
