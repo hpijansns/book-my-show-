@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Select Seats</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Facebook Pixel Code -->
+    <!-- Facebook Pixel -->
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -20,40 +20,67 @@
     fbq('init', '1252040857081560');
     fbq('track', 'PageView');
     </script>
-    <!-- End Facebook Pixel Code -->
 </head>
-<body class="bg-white">
-    <header class="top-header">
-        <button class="back-btn" onclick="window.history.back()">&#8592;</button>
-        <div class="header-titles">
-            <h2 id="seat-match-title">Select Seats</h2>
-            <p id="seat-match-venue" class="sub-text">Loading...</p>
+<body class="mobile-layout bg-white">
+    <header class="bms-header">
+        <div class="header-left">
+            <span class="back-icon" onclick="window.history.back()">&#8249;</span>
+            <h1 id="seat-match-title" class="truncate-title">Loading...</h1>
         </div>
     </header>
 
-    <main class="container">
-        <div class="seat-legend">
-            <div class="legend-item"><div class="seat available"></div> Available</div>
-            <div class="legend-item"><div class="seat locked"></div> Selected</div>
-            <div class="legend-item"><div class="seat booked"></div> Sold</div>
+    <!-- VIEW 1: Quantity Selection -->
+    <div id="qty-view">
+        <div class="timer-banner">
+            You have <strong>approximately 4 minutes</strong> to select your seats.
         </div>
+        <div class="stadium-bg"></div>
+        
+        <div class="qty-container">
+            <h2>How many seats?</h2>
+            <div class="cycle-img">
+                <img src="https://in.bmscdn.com/webin/common/icons/bicycle.png" alt="Bicycle" style="width: 180px; margin: 20px auto; display: block;">
+            </div>
+            
+            <div class="qty-bubbles" id="qty-bubbles">
+                <!-- 1 to 10 bubbles injected by JS -->
+            </div>
+            
+            <div class="info-pill">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                You can add upto 10 tickets.
+            </div>
 
-        <div class="screen-indicator">
-            <div class="screen-curve"></div>
-            <span>PITCH THIS WAY</span>
+            <div class="bottom-fixed-btn">
+                <button id="proceed-to-seats" class="btn-primary">Select Seats</button>
+            </div>
         </div>
+    </div>
 
-        <div id="seat-map" class="seat-grid">
-            <!-- Seats injected by JS -->
-        </div>
-    </main>
+    <!-- VIEW 2: Seat Layout Map -->
+    <div id="seat-view" style="display: none;">
+        <main class="container">
+            <div class="seat-legend">
+                <div class="legend-item"><div class="seat available"></div> Available</div>
+                <div class="legend-item"><div class="seat locked"></div> Selected</div>
+                <div class="legend-item"><div class="seat booked"></div> Sold</div>
+            </div>
 
-    <div class="sticky-bottom" id="checkout-bar" style="display: none;">
-        <div class="price-info">
-            <span class="label" id="seat-count-label">0 Seats</span>
-            <span class="value" id="total-price">₹0</span>
+            <div class="screen-indicator">
+                <div class="screen-curve"></div>
+                <span>PITCH THIS WAY</span>
+            </div>
+
+            <div id="seat-map" class="seat-grid"></div>
+        </main>
+
+        <div class="sticky-footer" id="checkout-bar" style="display: none;">
+            <div class="price-info">
+                <div class="price" id="total-price">₹0</div>
+                <div class="status" id="seat-count-label" style="color:#666; font-weight:normal;">0 Seats</div>
+            </div>
+            <button id="pay-now-btn" class="book-now-btn">Pay Now</button>
         </div>
-        <button id="pay-now-btn" class="btn-primary">Pay Now</button>
     </div>
 
     <!-- Payment Success Modal -->
@@ -62,7 +89,7 @@
             <div class="success-icon">✓</div>
             <h3>Booking Confirmed!</h3>
             <p>Your tickets have been successfully booked.</p>
-            <button onclick="window.location.href='index.html'" class="btn-primary mt-20">Back to Home</button>
+            <button onclick="window.location.href='index.html'" class="btn-primary" style="margin-top:20px;">Back to Home</button>
         </div>
     </div>
 
